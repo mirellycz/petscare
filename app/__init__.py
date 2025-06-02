@@ -7,8 +7,6 @@ db = SQLAlchemy()
 bcrypt = Bcrypt()
 migrate = Migrate()
 
-app = Flask(__name__)
-
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'secreto123'
@@ -18,16 +16,16 @@ def create_app():
     bcrypt.init_app(app)
     migrate.init_app(app, db)
 
+    from app.controllers.auth_controller import auth_bp
+    app.register_blueprint(auth_bp)
+
     @app.route('/')
     def index():
         return render_template('index.html')
 
-    from app.controllers.auth_controller import auth_bp
-    app.register_blueprint(auth_bp)
-
-
-
     return app
+
+
 
 
 
