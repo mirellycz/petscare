@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from app.models.user import User
 from app import db, bcrypt
+from flask import session
 import re
 
 
@@ -64,3 +65,8 @@ def login():
 
     return render_template('login.html')
 
+@auth_bp.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    flash("Você saiu da conta.", "info")
+    return redirect(url_for('auth.login'))

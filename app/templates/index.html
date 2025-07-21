@@ -8,7 +8,11 @@
     <h1>Bem-vindo ao PetsCare!</h1>
     <p>Conectando tutores e profissionais para o cuidado dos seus pets.</p>
 
-    <a href="{{ url_for('auth.login') }}">Login</a> |
-    <a href="{{ url_for('auth.register') }}">Cadastro</a>
+    {% if session.user_id %}
+        <p>Você está logado. <a href="{{ url_for('auth.logout') }}">Sair</a></p>
+    {% else %}
+        <a href="{{ url_for('auth.login') }}">Login</a> |
+        <a href="{{ url_for('auth.register') }}">Cadastro</a>
+    {% endif %}
 </body>
 </html>
