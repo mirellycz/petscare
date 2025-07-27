@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_migrate import Migrate
 
-
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 migrate = Migrate()
@@ -19,9 +18,6 @@ def create_app():
 
     from app.controllers.auth_controller import auth_bp
     app.register_blueprint(auth_bp)
-
-    from app.routes.appointment.routes import appointment_bp
-    app.register_blueprint(appointment_bp)
 
     @app.route('/')
     def index():
